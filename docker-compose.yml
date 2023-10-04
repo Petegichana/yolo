@@ -1,17 +1,13 @@
 version: "3.8"
 services:
-    web:
-        build: ./client
+    client:
+        build: 
+            context: ./client
         ports:
             - 3000:3000
-    api:
-        build: ./backend
+    backend:
+        build: 
+            context: ./backend
         ports:
             - 3000:3000
-        environment: 
-            DB_URL: mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/ 
-    db:
-        image: mongo:4.0-xenial
-        ports:
-            -27017:27017
-        volume: 
+           
