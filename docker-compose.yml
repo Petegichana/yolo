@@ -9,8 +9,9 @@ services:
         ports:
             - 3000:3000
         environment: 
-            - DB_URL=mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/ 
+            DB_URL: mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/ 
     db:
         image: mongo:4.0-xenial
         ports:
             -27017:27017
+        volume:     
