@@ -6,7 +6,6 @@ services:
       - 3000:3000 
     depends_on:
       - backend  
-
   backend:
     image: yolo-backend:1.0
     ports:
