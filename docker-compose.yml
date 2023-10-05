@@ -1,108 +1,25 @@
-version: '3'
+version: "3.8"
 services:
   client:
-    build:
-      context: ./client
+    image: yolo-client:1.0
     ports:
-      - "3000:3000"
-    networks:
-      - mynetwork
+      - 3000:3000 
     depends_on:
-      - backend
+      - backend  
 
   backend:
-    build:
-      context: ./backend
+    image: yolo-backend:1.0
     ports:
-      - "5000:5000"
-    networks:
-      - mynetwork
+      - 5000:5000
     environment:
-      MONGO_URI: "mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/"  # Connection string for MongoDB
+      DB_URL: mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/  
     depends_on:
       - mongo
-
   mongo:
-    image: mongo:latest
+    image: mongo:4.0-xenial
     ports:
-      - "27017:27017"
-    networks:
-      - mynetwork
-
-networks:
-  mynetwork:
-    driver: bridge
+      - 27017:27017
+    volumes:
+      - /path/to/mongo_data:/data/db
 
 
-# services:
-#   client:
-#     container_name: 8872659ad421
-#     image: yolo-client
-#     ports:
-#     - 3000:3000
-#     networks:
-#       frontend-net:
-#         ipv4_address: 172.51.0.101   
-#   backend:
-#     container_name: 0f730c545d16
-#     image: yolo-backend
-#     ports: 
-#     - 5000:5000
-#     environment:
-#       PORT: 5000
-#       DATABASE_URL: 'mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/'
-
-#     networks:
-#       backend-net:
-#         ipv4_address: 172.100.0.50
-#       frontend-net:
-#         ipv4_address: 172.51.0.51
-#     depends_on:
-#       - database
-
-#   database:
-#     container_name: back-end_database
-#     ports:
-#       - 27017:27017
-#     image: mongo
-#     environment:
-#       MONGO_INITDB_ROOT_USERNAME: backend
-#       MONGO_INITDB_ROOT_PASSWORD: backend
-#     networks:
-#       backend-net:
-#         ipv4_address: 172.100.0.102
-#     volumes:
-#         - backend_volume:/data/db
-
-# networks:
-#   backend-net:
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 172.100.0.0/16
-#   frontend-net:
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 172.51.0.0/16
-# volumes:
-#   backend_volume:
-
-
-
-
-
-# version: "2"
-# services:
-#     client:
-#         build: 
-#             context: ./client
-#         ports:
-#             - 3000:3000  
-#     backend:
-#         build: 
-#             context: ./backend
-#         ports:
-#             - 5000:5000
-# networks:
-#     default:         
