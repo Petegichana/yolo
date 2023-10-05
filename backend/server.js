@@ -19,7 +19,6 @@ let db = mongoose.connection;
 db.once('open', ()=>{
     console.log('Database connected successfully')
 })
-
 // Check for DB Errors
 db.on('error', (error)=>{
     console.log(error);
