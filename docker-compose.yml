@@ -11,15 +11,5 @@ services:
     image: yolo-backend:1.0
     ports:
       - 5000:5000
-    environment:
-      DB_URL: mongodb+srv://petegichana:2011417242.Ab@yolomy.zuy3bjh.mongodb.net/  
-    depends_on:
-      - mongo
-  mongo:
-    image: mongo:4.0-xenial
-    ports:
-      - 27017:27017
-    volumes:
-      - /path/to/mongo_data:/data/db
-
+    
 
