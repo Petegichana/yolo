@@ -1,12 +1,12 @@
 version: "3.8"
 services:
   client:
-    image: yolo-client:1.0
+    image: petegichana/yolo-client:1.0
     ports:
       - 3000:3000 
     depends_on:
       - backend  
   backend:
-    image: yolo-backend:1.0
+    image: petegichana/yolo-backend:1.0
     ports:
       - 5000:5000
