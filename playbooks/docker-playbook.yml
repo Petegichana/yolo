@@ -1,0 +1,54 @@
+---
+- name: Install Docker and Docker Compose
+  hosts: all
+  become: yes
+  vars:
+    client_image: petegichana/yolo-client:1.0
+    backend_image: petegichana/yolo-backend:1.0
+    app_folder: /yolo
+  tasks:
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+        state: present
+
+    - name: Update the apt package index
+      apt:
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - docker-ce
+        state: present
+
+    - name: Install Docker Compose
+      pip:
+        name: docker-compose
+
+    - name: Create app folder
+      file:
+        path: "{{ app_folder }}"
+        state: directory
+
+    - name: Copy docker-compose file
+      template:
+        src: ./../docker-compose.yml
+        dest: "{{ app_folder }}/docker-compose.yml"
+
+    - name: Run Docker Compose
+      community.general.docker_compose:
+        project_src: "{{ app_folder }}"
+        state: present
