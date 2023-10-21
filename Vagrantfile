@@ -13,6 +13,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "/Users/petergichana/Desktop/devopsmoringa/yolo/playbooks/docker-playbook.yml"
+    ansible.playbook = "/Users/petergichana/Desktop/devopsmoringa/yolo/docker-playbook.yml"
   end
 end
