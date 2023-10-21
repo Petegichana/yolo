@@ -1,0 +1,12 @@
+---
+# tasks file for roles/app
+# roles/app/tasks/main.yml
+- name: Create app folder
+  file:
+    path: "{{ app_folder }}"
+    state: directory
+
+- name: Copy docker-compose file
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ app_folder }}/docker-compose.yml"

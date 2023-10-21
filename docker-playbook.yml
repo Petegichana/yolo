@@ -1,0 +1,11 @@
+# docker-playbook.yml
+- name: Install Docker and Deploy App
+  hosts: all
+  become: yes
+  vars:
+    client_image: petegichana/yolo-client:1.0
+    backend_image: petegichana/yolo-backend:1.0
+    app_folder: /yolo
+  roles:
+    - app
+    - docker

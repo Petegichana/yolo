@@ -1,4 +1,3 @@
-
 Vagrant.configure("2") do |config|
   config.vm.box = "geerlingguy/ubuntu2004"
 
@@ -7,12 +6,15 @@ Vagrant.configure("2") do |config|
     v.linked_clone = true
   end
 
-# VM configuration
+  # VM configuration
   config.vm.define "ubuntu2004" do |ubuntu2004|
     ubuntu2004.vm.hostname = "ansible"
+    
+    # Port forwarding configuration
+    #ubuntu2004.vm.network "forwarded_port", guest: 3000, host: 3000
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "/Users/petergichana/Desktop/devopsmoringa/yolo/playbooks/docker-playbook.yml"
+    ansible.playbook = "/Users/petergichana/Desktop/devopsmoringa/yolo/docker-playbook.yml"
   end
 end
