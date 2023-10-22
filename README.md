@@ -53,7 +53,3 @@ Stopping the Application:
 To stop the application and the virtual machine, run:
 
 -vagrant halt
-
-Additional Notes
-Ensure the necessary ports (3000 and 5000) are open on your server.
-You can customize the application by editing the docker-compose.yml file and the corresponding Ansible playbook and roles.
