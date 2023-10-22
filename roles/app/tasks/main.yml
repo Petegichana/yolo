@@ -3,10 +3,15 @@
 # roles/app/tasks/main.yml
 - name: Create app folder
   file:
+  # Path specifies the location of the folder to be created.
     path: "{{ app_folder }}"
+  # State specifies whether the folder should exist or not. In this case, it's set to 'directory', indicating it should be a directory.  
     state: directory
 
 - name: Copy docker-compose file
+# Ansible module 'template' is used to copy a file from the local machine (in this case, docker-compose.yml.j2) to the remote host.
   template:
+  # src specifies the source file on the local machine.
     src: docker-compose.yml.j2
+  # dest specifies the destination path on the remote host where the file will be copied.  
     dest: "{{ app_folder }}/docker-compose.yml"
