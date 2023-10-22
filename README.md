@@ -2,7 +2,7 @@ YOLO Application
 
 Overview
 
-The YOLO application is a simple web application that consists of a client and a backend service. The client is a front-end application responsible for user interface and interactions, while the backend service provides necessary functionality to the client. This application uses Docker containers for easy deployment and management.
+This YOLO application is a simple web application that consists of a client and a backend service. The client is a front-end application responsible for user interface and interactions, while the backend service provides necessary functionality to the client. This application uses Docker containers for easy deployment and management.
 
 Elements of the Application
 1. Client:
@@ -27,7 +27,7 @@ How to Run the Application
 Clone the Repository:
 
 -git clone <repository-url>
--cd yolo-app
+-cd yoloapp
 
 Edit Hosts File:
 
@@ -40,9 +40,14 @@ Run the following command to set up the virtual machine and install necessary pa
 
 Access the Application:
 
-Once the provisioning is successful, access the application in your browser using the server IP address:
--Client: http://<server-ip>:3000
--Backend: http://<server-ip>:5000
+-vagrant ssh : To go to the server
+-cd /yolo :To go to the application directory where the docker-compose file is
+-sudo docker-compose up -d :To start the 2 containers
+-sudo docker ps: To see if the containers are running
+
+Once this is successful, access the application in your browser using the server IP address:
+-http://localhost:3000 since we forwarded the server ports to the host
+
 
 Stopping the Application:
 To stop the application and the virtual machine, run:

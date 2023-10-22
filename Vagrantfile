@@ -10,6 +10,9 @@ Vagrant.configure("2") do |config|
 # VM configuration
   config.vm.define "ubuntu2004" do |ubuntu2004|
     ubuntu2004.vm.hostname = "ansible"
+# Port forwarding configuration
+    ubuntu2004.vm.network "forwarded_port", guest: 3000, host: 3000  
+    ubuntu2004.vm.network "forwarded_port", guest: 5000, host: 5000  
   end
 
   config.vm.provision "ansible" do |ansible|
