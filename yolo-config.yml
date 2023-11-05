@@ -1,0 +1,15 @@
+# Define the API version for the Kubernetes object (ConfigMap in this case)
+apiVersion: v1
+
+# Define the type of Kubernetes object, which is ConfigMap
+kind: ConfigMap
+
+# Metadata section provides information about the ConfigMap
+metadata:
+  # Specify the name of the ConfigMap as "mongo-config"
+  name: yolo-config
+
+# Data section stores key-value pairs inside the ConfigMap
+data:
+  # Define a key "mongo-url" with the value "mongo-service"
+  mongo-url: backend-service

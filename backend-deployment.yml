@@ -1,22 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: yolo-backend-deployment
+  labels:
+    app: yolo-backend
 spec:
-  replicas: 3  # Adjust the number of replicas as needed for your application
   selector:
     matchLabels:
-      app: backend
+      app: yolo-backend
   template:
     metadata:
       labels:
-        app: backend
+        app: yolo-backend
     spec:
       containers:
-      - name: backend
-        image: petegichana/yolo-backend:1.0
-        ports:
-        - containerPort: 8080
-        env:
-        - name: MONGO_URI
-          value: <your-mongo-db-uri>
+        - name: yolo-backend
+          image: petegichana/yolo-backend:1.0
+          ports:
+            - containerPort: 5000
+
+          env:
+          - name: USER_NAME
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: username
+          - name: USER_PWD
+            valueFrom:
+              secretKeyRef:
+                name: mongodb-secret
+                key: password
+          - name: DB_URL
+            valueFrom:
+              configMapKeyRef:
+                name: yolo-config
+                key: mongo-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: yolo-backend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 31000
