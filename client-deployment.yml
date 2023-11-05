@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yolo-client-deployment
+  labels:
+    app: yolo-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yolo-client
+  template:
+    metadata:
+      labels:
+        app: yolo-client
+    spec:
+      containers:
+      - name: yolo-client
+        image: petegichana/yolo-client:1.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: username
+        - name: USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: password
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: yolo-config
+              key: mongo-url
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  selector:
+    app: yolo-client
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 32000
