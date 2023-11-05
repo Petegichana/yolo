@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
+    ansible.compatibility_mode = "auto"
     ansible.playbook = "/Users/petergichana/Desktop/devopsmoringa/yolo/docker-playbook.yml"
   end
 end
